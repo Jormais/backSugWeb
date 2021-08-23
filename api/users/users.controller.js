@@ -1,4 +1,3 @@
-require('dotenv').config();
 var mysql = require('mysql');
 var conexion = mysql.createPool({
     host : process.env.HOST,
@@ -32,7 +31,7 @@ function getOneUser(req, res){
             return;
         }
 
-        conexion.query("SELECT * FROM usuarios WHERE usuarios.nombre='Katiuska'", function (error, results, fields) {
+        conexion.query(`SELECT * FROM usuarios WHERE usuarios.nombre=${req}`, function (error, results, fields) {
             if (error){
                 throw error;
             }else {
@@ -49,8 +48,7 @@ function deleteUSer(req, res){
             console.error('Error de conexion: ' + err.stack);
             return;
         }
-
-        conexion.query(`DELETE FROM usuarios WHERE ID=4`, function (error, results, fields) {
+        conexion.query(`DELETE FROM usuarios WHERE numero_empleado=${req.params.id}`, function (error, results, fields) {
             if (error){
                 throw error;
             }else {
@@ -74,12 +72,15 @@ function postOneUser(req, res){
             return;
         }
 
-        conexion.query(`INSERT INTO usuarios VALUES ('Kati','eres chunga','1519','Otros','KatiBrito@gmail.com','1245532111','1','1','5')`, function (error, results, fields) {
+        
+
+        conexion.query(`INSERT INTO usuarios VALUES ('${req.body.name}','${req.body.subname}','${req.body.employee_number}','${req.body.job_category}','${req.body.email}','${req.body.password}','${req.body.terms_conditions}','${req.body.rol}')`, function (error, results, fields) {
             if (error){
                 throw error;
             }else {
                 //console.log("insert: " + results);
-                return res.json(results);
+                console.log(req.body.name);
+                return res.json("ECHO");
             }
         });
 
