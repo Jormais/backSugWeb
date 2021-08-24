@@ -31,7 +31,7 @@ function getOneUser(req, res){
             return;
         }
 
-        conexion.query(`SELECT * FROM usuarios WHERE usuarios.nombre=${req}`, function (error, results, fields) {
+        conexion.query(`SELECT * FROM usuarios WHERE usuarios.email='${req.params.id}'`, function (error, results, fields) {
             if (error){
                 throw error;
             }else {
