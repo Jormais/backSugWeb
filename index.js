@@ -8,8 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 const usuariosRouter = require('./api/users/users.router');
+const usuariosRouterAcepted = require('./api/users/usersAcepted.router');
 
-app.use("/users", usuariosRouter)
+app.use("/users", usuariosRouter);
+app.use("/usersAcepted", usuariosRouterAcepted);
 
 app.listen(3000, e => {
     if (e) {

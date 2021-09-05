@@ -6,6 +6,13 @@ var conexion = mysql.createPool({
     password : process.env.PASSWORD,
 });
 
+var conexion1 = mysql.createPool({
+    host : process.env.HOST,
+    database : process.env.DATABASE1,
+    user : process.env.USER,
+    password : process.env.PASSWORD,
+});
+
 function getUsers(req, res){
     conexion.getConnection(function(err) {
         if (err) {
@@ -48,7 +55,7 @@ function deleteUSer(req, res){
             console.error('Error de conexion: ' + err.stack);
             return;
         }
-        conexion.query(`DELETE FROM usuarios WHERE numero_empleado=${req.params.id}`, function (error, results, fields) {
+        conexion.query(`DELETE FROM usuarios WHERE employee_number=${req.params.id}`, function (error, results, fields) {
             if (error){
                 throw error;
             }else {
@@ -87,4 +94,26 @@ function postOneUser(req, res){
     });
 }
 
-module.exports = {getUsers, getOneUser, deleteUSer, putUser, patchOneUser, postOneUser}
+function postUserAccepted(req, res){
+    conexion1.getConnection(function(err) {
+        if (err) {
+            console.error('Error de conexion: ' + err.stack);
+            return;
+        }
+
+        
+
+        conexion1.query(`INSERT INTO usuarios VALUES ('${req.body.name}','${req.body.subname}','${req.body.employee_number}','${req.body.job_category}','${req.body.email}','${req.body.password}','${req.body.terms_conditions}','${req.body.rol}')`, function (error, results, fields) {
+            if (error){
+                throw error;
+            }else {
+                //console.log("insert: " + results);
+                console.log(req.body.name);
+                return res.json("ECHO");
+            }
+        });
+
+    });
+}
+
+module.exports = {getUsers, getOneUser, deleteUSer, putUser, patchOneUser, postOneUser, postUserAccepted}
