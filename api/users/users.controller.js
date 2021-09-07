@@ -94,7 +94,7 @@ function postOneUser(req, res){
     });
 }
 
-function postUserAccepted(req, res){
+function postUserAcepted(req, res){
     conexion1.getConnection(function(err) {
         if (err) {
             console.error('Error de conexion: ' + err.stack);
@@ -116,4 +116,22 @@ function postUserAccepted(req, res){
     });
 }
 
-module.exports = {getUsers, getOneUser, deleteUSer, putUser, patchOneUser, postOneUser, postUserAccepted}
+function getOneUserAcepted(req, res){
+    conexion1.getConnection(function(err) {
+        if (err) {
+            console.error('Error de conexion: ' + err.stack);
+            return;
+        }
+
+        conexion1.query(`SELECT * FROM usuarios WHERE usuarios.email='${req.params.id}'`, function (error, results, fields) {
+            if (error){
+                throw error;
+            }else {
+                return res.json(results);
+            }
+        });
+
+    });
+}
+
+module.exports = {getUsers, getOneUser, deleteUSer, putUser, patchOneUser, postOneUser, postUserAcepted, getOneUserAcepted}
