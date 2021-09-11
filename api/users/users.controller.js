@@ -81,7 +81,7 @@ function postOneUser(req, res){
 
         
 
-        conexion.query(`INSERT INTO usuarios VALUES ('${req.body.name}','${req.body.subname}','${req.body.employee_number}','${req.body.job_category}','${req.body.email}','${req.body.password}','${req.body.terms_conditions}','${req.body.rol}')`, function (error, results, fields) {
+        conexion.query(`INSERT INTO usuarios VALUES ('${req.body.name}','${req.body.subname}','${req.body.employee_number}','${req.body.job_category}','${req.body.email}','${req.body.password}','${req.body.terms_conditions}','${req.body.rol}','${req.body.driver_number}')`, function (error, results, fields) {
             if (error){
                 throw error;
             }else {
@@ -103,7 +103,7 @@ function postUserAcepted(req, res){
 
         
 
-        conexion1.query(`INSERT INTO usuarios VALUES ('${req.body.name}','${req.body.subname}','${req.body.employee_number}','${req.body.job_category}','${req.body.email}','${req.body.password}','${req.body.terms_conditions}','${req.body.rol}')`, function (error, results, fields) {
+        conexion1.query(`INSERT INTO usuarios VALUES ('${req.body.name}','${req.body.subname}','${req.body.employee_number}','${req.body.job_category}','${req.body.email}','${req.body.password}','${req.body.terms_conditions}','${req.body.rol}','${req.body.driver_number}')`, function (error, results, fields) {
             if (error){
                 throw error;
             }else {
