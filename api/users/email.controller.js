@@ -13,8 +13,8 @@ function sendEmail(req, res){
 var mailOptions = {
     from: 'Remitente',
     to: 'jonaybrito15@gmail.com',
-    subject: 'Asunto',
-    text: 'Contenido del email'
+    subject: req.body.subject,
+    text: req.body.text
 };
 // Enviamos el email
 transporter.sendMail(mailOptions, function(error, info){
