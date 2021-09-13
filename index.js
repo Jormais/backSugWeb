@@ -9,9 +9,11 @@ app.use(express.json());
 
 const usuariosRouter = require('./api/users/users.router');
 const usuariosRouterAcepted = require('./api/users/usersAcepted.router');
+const email = require('./api/users/email.router');
 
 app.use("/users", usuariosRouter);
 app.use("/usersAcepted", usuariosRouterAcepted);
+app.use("/email", email);
 
 app.listen(3000, e => {
     if (e) {
